@@ -74,14 +74,27 @@ class Graph:
                     s.push(next_vert)
 
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
+            *explore*:
+                print this node
+                *explore* all its unvisited neighbors
+                return
         """
+        print(starting_vertex)
+        # create the set:
+        if visited is None:
+            visited = set()
+        # add starting vertex to visited
+        visited.add(starting_vertex)
 
+        for next_vert in self.vertices[starting_vertex]:
+            if next_vert not in visited:
+                self.dft_recursive(next_vert, visited)
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -143,15 +156,37 @@ class Graph:
                 for next_vert in self.get_neighbors(last_vertex):
                     s.push(current_path + [next_vert])
 
-    def dfs_recursive(self, starting_vertex, destination_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited=None, path=None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
-
         This should be done using recursion.
         """
-        pass  # TODO
+        # create visited set and path list:
+        if visited is None:
+            visited = set()
+
+        if path is None:
+            path =[]
+        # add starting vertex to visited:
+        visited.add(starting_vertex)
+        #make a copy of the lists, adding the new vertex on
+        path = path + [starting_vertex]
+
+        #base case, finding target:
+        if starting_vertex == destination_vertex:
+            return path
+        # otherwise, search through graph looking for target:
+        for next_vert in self.vertices[starting_vertex]:
+            if next_vert not in visited:
+                new_path = self.dfs_recursive(next_vert, destination_vertex, visited, path)
+
+                if new_path:
+                    return new_path
+        # if target not in graph, return none.
+        return None
+
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
