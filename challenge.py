@@ -18,16 +18,7 @@ through the UPER problem solving framework while going through your thought proc
 
 x = ['Waltz', 'Tango', 'Viennese Waltz', 'Foxtrot', 'Cha Cha', 'Samba', 'Rumba', 'Paso Doble', 'Jive']
 
-# dictionary = {}
-#
-# for y in x:
-#     if y not in dictionary:
-#         dictionary[y] = y
-#
-# sorted = list(dictionary.items()).sort()
 
+x.sort()
 
-x = x.sorted()
-
-for y in x:
-    print x
+[print(name) for name in x]
