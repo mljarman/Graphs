@@ -1,4 +1,4 @@
-from util import Queue
+from util import Queue, Stack
 def earliest_ancestor(ancestors, starting_node):
     # Create an empty queue and enqueue A PATH TO the starting node
     q = Queue()
@@ -25,8 +25,11 @@ def earliest_ancestor(ancestors, starting_node):
       # IF NO, compare length of current path to store current_longest.
             # if current_path is longest, that becomes the current_longest
             # along with node at that distrance (last vertex)
-            if len(current_path) > current_longest[0] and last_node > current_longest[1]:
+            if len(current_path) > current_longest[0]:
                 current_longest = (len(current_path), last_node)
+            elif len(current_path) == current_longest and current_longest[1] > last_node:
+                current_longest = (len(current_path), last_node)
+
         else:
             # if there are parents in the dictionary, add new paths for each
             # parent of the last_vertex:
