@@ -61,22 +61,23 @@ while s.size() > 0:
         for dir in exits:
             room_dict[curr_room][dir] = '?'
             print(f'after adding exits {room_dict}')
-            if room_dict[curr_room][dir] == '?':
-                player.travel(dir)
-                prev_room = curr_room
-                print(f'prev_room = {curr_room}')
-                curr_room = player.current_room.id
-                print(f'curr_room = {curr_room}')
-                direction = dir
-                print(f'direction = {dir}')
-                room_dict[prev_room][dir] = curr_room
-                # room_dict[curr_room][rev_dir[exit]] = prev_room
-                # print(f'dict after update {room_dict}')
-                traversal_path.append(direction)
-                print(f't path {traversal_path}')
-                s.push(path + [curr_room])
-            else:
-                player.travel(rev_dir[dir])
+        if room_dict[curr_room][dir] == '?':
+            player.travel(dir)
+            prev_room = curr_room
+            print(f'prev_room = {curr_room}')
+            curr_room = player.current_room.id
+            print(f'curr_room = {curr_room}')
+            direction = dir
+            print(f'direction = {dir}')
+            print(f'reverse = {rev_dir[dir]}')
+            room_dict[prev_room][dir] = curr_room
+            room_dict[curr_room][rev_dir[dir]] = prev_room
+            # print(f'dict after update {room_dict}')
+            traversal_path.append(direction)
+            print(f't path {traversal_path}')
+            s.push(path + [curr_room])
+        else:
+            player.travel(rev_dir[dir])
 
         # exits for current room:
         # for exit in exits:
