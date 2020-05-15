@@ -9,3 +9,11 @@ class Player:
                 next_room.print_room_description(self)
         else:
             print("You cannot move in that direction.")
+    def travel_back(self, direction):
+        reverse_dirs = {
+                        'n':'s',
+                        's':'n',
+                        'e':'w',
+                        'w':'e'
+        }
+        self.travel(reverse_dirs[direction])
